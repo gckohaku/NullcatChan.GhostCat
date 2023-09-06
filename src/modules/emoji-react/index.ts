@@ -37,7 +37,7 @@ export default class extends Module {
 		};
 
 		if (await gomamayo.find(note.text)) return react(config.gomamayo);
-		if (includes(note.text, ['ぬるきゃっとちゃん', 'ぬるきゃぼっと', 'ぬるきゃっとぼっと'])) return react(config.antenna);
+		if (includes(note.text, ['ぬるきゃ'])) return react(config.antenna);
 		if (
 			includes(note.text, [
 				'ねむい',

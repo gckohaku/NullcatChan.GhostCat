@@ -160,6 +160,18 @@ export default class extends Module {
 					visibility: 'specified',
 					visibleUserIds: [remind.userId]
 				});
+				if (reply.id === undefined) {
+					const fs = require('fs');
+					const path = `${config.memoryDir}`;
+					const now = new Date();
+					try {
+						fs.writeFileSync(`${path}/${now.getFullYear()}${now.getMonth()}${now.getDate()}${now.getHours()}${now.getMinutes()}${now.getSeconds()}${now.getMilliseconds()}.erl`, `${now.toString()}\nerror reply object is this\n${reply}`, 'utf-8');	
+					}
+					catch (err) {
+						this.log(err);
+					}
+					return;
+				}
 			} catch (err) {
 				// renote対象が消されていたらリマインダー解除
 				if (err.statusCode === 400) {
