@@ -164,8 +164,11 @@ export default class extends Module {
 					const fs = require('fs');
 					const path = `${config.memoryDir}`;
 					const now = new Date();
+					const fillDigit = (num, digit = 2) => {
+						return ("0".repeat(digit - 1) + num).slice(-digit);
+					}
 					try {
-						fs.writeFileSync(`${path}/${now.getFullYear()}${now.getMonth()}${now.getDate()}${now.getHours()}${now.getMinutes()}${now.getSeconds()}${now.getMilliseconds()}.erl`, `${now.toString()}\nerror reply object is this\n${reply}`, 'utf-8');	
+						fs.writeFileSync(`${path}/${now.getFullYear()}${fullDigit(now.getMonth())}${fullDigit(now.getDate())}${fullDigit(now.getHours())}${fullDigit(now.getMinutes())}${fullDigit(now.getSeconds())}${fullDigit(now.getMilliseconds(), 3)}.erl`, `${now.toString()}\nerror reply object is this\n${reply}`, 'utf-8');	
 					}
 					catch (err) {
 						this.log(err);
